@@ -1,53 +1,64 @@
 package com.example.cloudstorage;
 
+import android.util.Log;
 import java.io.File;
+
 
 public class CloudClass {
     private static CloudClass instance;
     private CloudProvider cloudProvider;
+    private static final String TAG = "CloudClass"; // Тег для отладочных логов
 
     // Приватный конструктор для реализации синглтона
-    protected CloudClass() {
+    private CloudClass() {
         // Инициализация облачного провайдера
         cloudProvider = new CloudProvider();
     }
 
-    protected static CloudClass getInstance() {
+    public static CloudClass getInstance() {
         if (instance == null) {
             instance = new CloudClass();
         }
         return instance;
     }
 
-    protected void uploadFile(File file) {
+    public void uploadFile(File file) {
+        Log.d(TAG, "Загрузка файла: " + file.getName());
         cloudProvider.uploadFile(file);
     }
 
-    protected void downloadFile(String fileName) {
+    public void downloadFile(String fileName) {
+        Log.d(TAG, "Скачивание файла: " + fileName);
         cloudProvider.downloadFile(fileName);
     }
 
-    protected void deleteFile(String fileName) {
+    public void deleteFile(String fileName) {
+        Log.d(TAG, "Удаление файла: " + fileName);
         cloudProvider.deleteFile(fileName);
     }
 
-    protected void renameFile(String oldFileName, String newFileName){
+    public void renameFile(String oldFileName, String newFileName){
+        Log.d(TAG, "Переименование файла: " + oldFileName + " в " + newFileName);
         cloudProvider.renameFile(oldFileName, newFileName);
     }
 
-    protected void previewFile(String fileName){
+    public void previewFile(String fileName){
+        Log.d(TAG, "Предпросмотр файла: " + fileName);
         cloudProvider.previewFile(fileName);
     }
 
-    protected void createFolder(String folderName) {
-        cloudProvider.creteFolder(folderName);
+    public void createFolder(String folderName) {
+        Log.d(TAG, "Создание папки: " + folderName);
+        cloudProvider.createFolder(folderName);
     }
 
-    protected void deleteFolder(String folderName) {
+    public void deleteFolder(String folderName) {
+        Log.d(TAG, "Удаление папки: " + folderName);
         cloudProvider.deleteFolder(folderName);
     }
 
-    protected void renameFolder(String oldFolderName, String newFolderName) {
+    public void renameFolder(String oldFolderName, String newFolderName) {
+        Log.d(TAG, "Переименование папки: " + oldFolderName + " в " + newFolderName);
         cloudProvider.renameFolder(oldFolderName, newFolderName);
     }
 }
